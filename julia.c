@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:35:59 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/08 18:57:15 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/14 13:28:08 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,13 @@ void	julia(t_mandel *m)
 
 	x = 0;
 	y = 0;
-	while (y < m->image->height)
+	while (++y < m->image->height)
 	{
-		while (x < m->image->width)
+		while (++x < m->image->width)
 		{
 			julia_calculation(m, x, y, m->real, m->imag);
 			mlx_put_pixel(m->image, x, y, color(m));
-			x++;
 		}
-		y++;
 	}
 }
 // julia: takes a single parameter m whch is a pointer to t_mandel structure.

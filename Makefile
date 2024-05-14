@@ -6,7 +6,7 @@
 #    By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 18:25:39 by ahusic            #+#    #+#              #
-#    Updated: 2024/05/08 19:02:03 by ahusic           ###   ########.fr        #
+#    Updated: 2024/05/14 13:28:29 by ahusic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ libmlx:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(LIB):
-	@make -sC $(LIB_PATH)
+	@make -sC $(LIBMLX)
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(LIB) -o $(NAME)
