@@ -6,14 +6,13 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:35:59 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/14 13:28:08 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:27:27 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "lib/MLX42/include/MLX4/MLX42.h"
 
-void	julia_calculation(float re, float im, float const_re, float const_im)
+int	julia_calculation(float re, float im, float const_re, float const_im)
 {
 	double	temp;
 	int		iters_count;
@@ -29,28 +28,29 @@ void	julia_calculation(float re, float im, float const_re, float const_im)
 	return (iters_count);
 }
 
-void	julia(t_mandel *m)
+void	julia(void *param)
 {
 	uint32_t	x;
 	uint32_t	y;
+	t_mandel	*m;
+	double		aspect_ratio;
 
-	x = 0;
+	m = (t_mandel *)param;
+	if (m->should_draw != 1)
+		return ;
+	aspect_ratio = (double)m->image->width / m->image->height;
 	y = 0;
 	while (++y < m->image->height)
 	{
+		x = 0;
 		while (++x < m->image->width)
 		{
-			julia_calculation(m, x, y, m->real, m->imag);
+			m->real = m->xmin + (double)x / m->image->width \
+			* (m->xmax - m->xmin) * aspect_ratio;
+			m->imag = m->ymin + (double)y / m->image->height \
+			* (m->ymax - m->ymin);
+			m->iters = julia_calculation(m->real, m->imag, m->creal, m->cimag);
 			mlx_put_pixel(m->image, x, y, color(m));
 		}
 	}
 }
-// julia: takes a single parameter m whch is a pointer to t_mandel structure.
-// Declares two variables x and y which represent the coordinates of the pixel.
-// Enters a nested loop which iterates over the height of the image incrementing y on each iteration.
-// Inner loop iterates over the width of the image incrementing x on each iteration.
-// For each pixec it calles julia_calculation which calculates the corresponding point in the complex plane.
-// Updates the iters fied of m structure with the nnumber of iters it took for the point to escape.
-// Calls mlx_put_pixel that draws a pixel at (x,y) coordinates in the image with the color of the pixel determined by the color function.
-// The color function calculates the color of the pixel based on the number of iterations it took for the point to escape the Julia set.
-// Increments y to move to the next row of pixels.

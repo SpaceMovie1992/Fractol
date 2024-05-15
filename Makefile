@@ -6,7 +6,7 @@
 #    By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 18:25:39 by ahusic            #+#    #+#              #
-#    Updated: 2024/05/14 13:28:29 by ahusic           ###   ########.fr        #
+#    Updated: 2024/05/15 17:34:01 by ahusic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,16 @@ LIBMLX	:= ./lib/MLX42
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:= fractol.c
+SRCS	:= fractol.c extra.c julia.c mandelbrot.c moving.c utils.c
 OBJS	:= ${SRCS:.c=.o}
 
 all: libmlx $(LIB) $(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+init:
+	git submodule update --init --recursive
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"

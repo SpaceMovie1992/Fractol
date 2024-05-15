@@ -6,24 +6,24 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:26:18 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/14 13:27:26 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:29:18 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include "lib/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <errno.h>
-# include "lib/MLX42/include/MLX42/MLX42.h"
 
 # define WIDTH 1200
 # define HEIGHT 1080
-# define MAXITERATIONS 1000
+# define MAXITERATIONS 100
 
 typedef struct Mandelparams
 {
@@ -48,14 +48,23 @@ typedef struct Mandelparams
 // pixels ad colors
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int		color(t_mandel *m);
+int		ft_atoi(const char *str);
 
 // mandelbrot
 void	setup_mandelbrot(t_mandel *m, int pixel_x, int pixel_y);
-void	mandelbrot(t_mandel *m);
+void	value_update(t_mandel *m);
+void	mandelbrot(void *param);
 
 // julia
-void	julia_calculation(float re, float im, float const_re, float const_im);
-void	julia(t_mandel *m);
+int		julia_calculation(float re, float im, float const_re, float const_im);
+void	julia(void *param);
+
+// extras
+int		ft_isspace(int c);
+int		ft_isdigit(int c);
+double	atodigit(const char **str);
+double	atofract(const char *str);
+double	atofloat(const char **str);
 
 // moving
 void	up(t_mandel *m);

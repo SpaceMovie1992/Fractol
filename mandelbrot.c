@@ -6,12 +6,11 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:37:22 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/08 18:59:42 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:34:23 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "lib/MLX42/include/MLX42/MLX42.h"
 
 void	setup_mandelbrot(t_mandel *m, int pixel_x, int pixel_y)
 {
@@ -19,7 +18,7 @@ void	setup_mandelbrot(t_mandel *m, int pixel_x, int pixel_y)
 	double	height_ratio;
 
 	width_ratio = (double)pixel_x / m->image->width;
-	height_ratio = (double)pixel_x / m->image->height;
+	height_ratio = (double)pixel_y / m->image->height;
 
 	m->real = m->xmin + width_ratio * (m->xmax - m->xmin);
 	m->imag = m->ymin + height_ratio * (m->ymax - m->ymin);
@@ -59,13 +58,11 @@ void	mandelbrot(void *param)
 		x = 0;
 		while (++x < m->image->width)
 		{
-			ft_setup_mandelbrot(m, x, y);
+			setup_mandelbrot(m, x, y);
 			while (m->iters < MAXITERATIONS && m->zreal * m->zreal + \
 			m->zimag * m->zimag < 4.0)
-				ft_value_update(m);
-			m->color = ft_pixel(m->iters % 128, m->iters % 64, \
-			m->iters % 255, 255);
-			mlx_put_pixel(m->image, x, y, m->color);
+				value_update(m);
+			mlx_put_pixel(m->image, x, y, color(m));
 		}
 	}
 	m->should_draw = 0;

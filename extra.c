@@ -6,9 +6,11 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:44:53 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/13 19:35:35 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:32:46 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fractol.h"
 
 int	ft_isspace(int c)
 {
@@ -39,21 +41,10 @@ double	atodigit(const char **str)
 double	atofract(const char *str)
 {
 	double	res;
-	double	power;
-	int		digit;
 
-	res = 0.0;
-	power = 1.0;
-	if (*str == '.')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		digit = *str - '0';
-		res = res * 10.0 + digit;
-		power *= 10.0;
-		str++;
-	}
-	return (res / power);
+	res = (double)ft_atoi(str);
+	res /= 100;
+	return (res);
 }
 
 double	atofloat(const char **str)

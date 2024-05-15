@@ -6,12 +6,11 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:13:24 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/08 19:22:35 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:11:17 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "lib/MLX42/include/MLX42/MLX42.h"
 
 void	up(t_mandel *m)
 {

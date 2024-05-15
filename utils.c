@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:37:05 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/08 19:34:43 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:10:50 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,30 @@ int	color(t_mandel *m)
 	b = (m->iters * 20) % 255;
 
 	return (ft_pixel(r, g, b, 255));
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	s;
+	int	j;
+
+	i = 0;
+	s = 1;
+	j = 0;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			s = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		j = (j * 10) + (str[i] - '0');
+		i++;
+	}
+	return (j * s);
 }

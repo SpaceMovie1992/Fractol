@@ -6,7 +6,7 @@
 /*   By: ahusic <ahusic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:10:30 by ahusic            #+#    #+#             */
-/*   Updated: 2024/05/14 11:53:48 by ahusic           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:30:48 by ahusic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	zoom(double x_move, double y_move, void *param)
 		m->ymin -= (m->ymax - m->ymin) * zooming;
 		m->ymax += (m->ymax - m->ymin) * zooming;
 	}
-	else if(y_move > 0)
+	else if (y_move > 0)
 	{
 		m->xmin += (m->xmax - m->xmin) * zooming;
 		m->xmax -= (m->xmax - m->xmin) * zooming;
@@ -60,7 +60,6 @@ void	hook(mlx_key_data_t keydata, void *param)
 void	initialize(t_mandel *m, char **c, mlx_t *mlx, int argc)
 {
 	m->should_draw = 1;
-
 	if (argc == 2 && c[1][0] == 'm')
 	{
 		m->xmin = -2.5;
